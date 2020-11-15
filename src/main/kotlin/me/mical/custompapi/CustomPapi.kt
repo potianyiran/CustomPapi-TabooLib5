@@ -6,6 +6,8 @@ import io.izzel.taboolib.module.inject.TInject
 import me.mical.custompapi.config.CPFile
 import me.mical.custompapi.config.CPFolder
 import me.mical.custompapi.hook.CPExpansion
+import me.mical.custompapi.util.Util.toCPPlayer
+import org.bukkit.Bukkit
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 import java.util.*
@@ -19,6 +21,7 @@ object CustomPapi : Plugin() {
 
     override fun onEnable() {
         getCPFolder().load()
+        Bukkit.getOnlinePlayers().forEach { it.toCPPlayer().initData() }
         CPExpansion().register()
     }
 

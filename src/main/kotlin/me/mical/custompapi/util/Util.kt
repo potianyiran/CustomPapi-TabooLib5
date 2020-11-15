@@ -6,5 +6,5 @@ import org.bukkit.entity.Player
 
 object Util {
     fun OfflinePlayer.toCPPlayer() : CPPlayer = CPPlayer(this)
-    fun Player.toCCPlayer() : CPPlayer = CPPlayer(this)
+    fun Player.toCPPlayer() : CPPlayer = CPPlayer(this)
 }
