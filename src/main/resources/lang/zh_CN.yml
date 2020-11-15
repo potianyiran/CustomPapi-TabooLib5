@@ -1,3 +1,4 @@
-LoadedData: "&7共加载 &c数据文件夹/data &7中的 &c{0} &7个数据文件."
-NoDataLoad: "&c数据文件夹/data &7中没有数据可供加载."
-FailLoadData: "&7加载 &c数据文件夹/data &7时遇到错误(&c数据文件夹/data 对象为 null.&7)."
+LoadedData: "&7[&3Custom&bPapi&7] &f共加载 &c数据文件夹/data &f中的 &c{0} &f个数据文件."
+NoDataLoad: "&7[&3Custom&bPapi&7] &c数据文件夹/data &f中没有数据可供加载."
+FailLoadData: "&7[&3Custom&bPapi&7] &f加载 &c数据文件夹/data &f时遇到错误(&c数据文件夹/data 对象为 null.&f)."
+ReloadComplete: "&7[&3Custom&bPapi&7] &f已成功重载数据文件和配置文件. (&3{0}&fMs)"

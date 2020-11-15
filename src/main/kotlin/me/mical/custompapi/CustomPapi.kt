@@ -13,7 +13,7 @@ object CustomPapi : Plugin() {
     fun getCPFolder() : CPFolder = CPFolder(this)
     fun getCPFile() : CPFile = CPFile(this, getCPFolder().getCPFolderFile())
     val cp_dataMap = hashMapOf<UUID, YamlConfiguration>()
-    @TInject("config.yml")
+    @TInject("config.yml", locale = "Language")
     lateinit var CONFIG : TConfig
 
     override fun onEnable() {

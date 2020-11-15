@@ -24,8 +24,13 @@ class CPFolder constructor(private val plugin: CustomPapi) {
                 CustomPapi.cp_dataMap[uuid] = data
             }
             if (files.isEmpty())
-                TLocale.Logger.warn("NoDataLoad")
-            else TLocale.Logger.info("LoadedData", files.size.toString())
-        } else TLocale.Logger.error("FailLoadData")
+                TLocale.sendToConsole("NoDataLoad")
+            else TLocale.sendToConsole("LoadedData", files.size.toString())
+        } else TLocale.sendToConsole("FailLoadData")
+    }
+
+    fun reload() {
+        CustomPapi.cp_dataMap.clear()
+        load()
     }
 }
