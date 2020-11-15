@@ -2,3 +2,4 @@ LoadedData: "&7[&3Custom&bPapi&7] &f共加载 &c数据文件夹/data &f中的 &c
 NoDataLoad: "&7[&3Custom&bPapi&7] &c数据文件夹/data &f中没有数据可供加载."
 FailLoadData: "&7[&3Custom&bPapi&7] &f加载 &c数据文件夹/data &f时遇到错误(&c数据文件夹/data 对象为 null.&f)."
 ReloadComplete: "&7[&3Custom&bPapi&7] &f已成功重载数据文件和配置文件. (&3{0}&fMs)"
+InitedData: "&7[&3Custom&bPapi&7] &f已为玩家 &c{0} &f创建数据档案."

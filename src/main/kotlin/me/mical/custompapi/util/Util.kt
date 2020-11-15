@@ -1,9 +1,10 @@
 package me.mical.custompapi.util
 
 import me.mical.custompapi.entity.CPPlayer
-import org.bukkit.ChatColor
+import org.bukkit.OfflinePlayer
 import org.bukkit.entity.Player
 
 object Util {
-    fun Player.toCPPlayer() : CPPlayer = CPPlayer(this)
+    fun OfflinePlayer.toCPPlayer() : CPPlayer = CPPlayer(this)
+    fun Player.toCCPlayer() : CPPlayer = CPPlayer(this)
 }

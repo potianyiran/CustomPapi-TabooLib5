@@ -11,9 +11,15 @@ class CPFolder constructor(private val plugin: CustomPapi) {
         if (!getCPFolderFile().exists()) getCPFolderFile().mkdirs()
     }
 
-    fun getCPFolderFile() : File {
-        return File(plugin.plugin.dataFolder, "data")
+    fun initPlayerData(uuid: UUID) {
+        val file = File(getCPFolderFile(), "${uuid}.yml")
+        if (!file.exists()) file.createNewFile()
     }
+
+    fun getCPFolderFile() : File {
+        return plugin.dataFolder
+    }
+
     fun load() {
         val files = getCPFolderFile().listFiles { _, name -> name.endsWith("yml") }
         if (files != null) {
