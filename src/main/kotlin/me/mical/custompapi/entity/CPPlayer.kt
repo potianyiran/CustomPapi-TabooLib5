@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
 class CPPlayer constructor(private val player: OfflinePlayer) {
+    fun getData() : YamlConfiguration = CustomPapi.getCPFile().getData(player)
     fun hasData() : Boolean = CustomPapi.cp_dataMap.containsKey(player.uniqueId)
     fun initData() {
         if (!(CustomPapi.cp_dataMap.containsKey(player.uniqueId) || File(CustomPapi.getCPFolder().getCPFolderFile(), "${player.uniqueId}.yml").exists())) {

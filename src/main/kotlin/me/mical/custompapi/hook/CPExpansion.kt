@@ -3,6 +3,7 @@ package me.mical.custompapi.hook
 import me.clip.placeholderapi.expansion.PlaceholderExpansion
 import me.mical.custompapi.CustomPapi
 import org.bukkit.OfflinePlayer
+import org.bukkit.entity.Player
 
 class CPExpansion : PlaceholderExpansion() {
 
@@ -12,8 +13,8 @@ class CPExpansion : PlaceholderExpansion() {
 
     override fun getVersion(): String = CustomPapi.plugin.description.version
 
-    override fun onRequest(player: OfflinePlayer?, params: String): String {
-        return super.onRequest(player, params)
+    override fun onRequest(player: OfflinePlayer?, params: String): String? {
+        return null
     }
 
 
