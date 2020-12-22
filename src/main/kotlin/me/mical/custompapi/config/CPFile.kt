@@ -13,4 +13,10 @@ class CPFile constructor(private val plugin: CustomPapi) {
             player.toCPPlayer().initData()
         return plugin.cp_dataMap[player.uniqueId]!!
     }
+
+    fun getDataFile(player: OfflinePlayer) : File {
+        if (!plugin.cp_dataMap.containsKey(player.uniqueId))
+            player.toCPPlayer().initData()
+        return plugin.getCPFolder().getPlayerDataFile(player.uniqueId)
+    }
 }

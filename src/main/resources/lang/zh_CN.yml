@@ -3,3 +3,7 @@ NoDataLoad: "&7[&3Custom&bPapi&7] &c数据文件夹/data &f中没有数据可供
 FailLoadData: "&7[&3Custom&bPapi&7] &f加载 &c数据文件夹/data &f时遇到错误(&c数据文件夹/data 对象为 null.&f)."
 ReloadComplete: "&7[&3Custom&bPapi&7] &f已成功重载数据文件和配置文件. (&3{0}&fMs)"
 InitedData: "&7[&3Custom&bPapi&7] &f已为玩家 &c{0} &f创建数据档案."
+GlobalData.Load.None: "&7[&3Custom&bPapi&7] &f没有子变量可供加载."
+Data.SaveFailure: "&7[&3Custom&bPapi&7] &f无法保存 &c{0} &f的数据文件."
+Command:
+  IllegalArgument: "&7[&3Custom&bPapi&7] &f参数非法或参数不足."

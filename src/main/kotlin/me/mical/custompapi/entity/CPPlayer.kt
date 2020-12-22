@@ -16,4 +16,36 @@ class CPPlayer constructor(private val player: OfflinePlayer) {
             TLocale.sendToConsole("InitedData", player.uniqueId.toString())
         }
     }
+
+    fun getDum(varArg: String) : Int {
+        return getData().getInt("${varArg}.Amount", 0)
+    }
+
+    fun getTiming(varArg: String) : Long {
+        return getData().getLong("${varArg}.Amount", System.currentTimeMillis())
+    }
+
+    fun setDum(varArg: String, dum: Int) {
+        getData().set("${varArg}.Amount", dum)
+        save()
+    }
+
+    fun addDum(varArg: String, dum: Int) {
+        getData().set("${varArg}.Amount", getDum(varArg) + dum)
+        save()
+    }
+
+    fun takeDum(varArg: String, dum: Int) {
+        getData().set("${varArg}.Amount", getDum(varArg) - dum)
+        save()
+    }
+
+    fun setDefault(varArg: String) {
+        getData().set("${varArg}.Amount", CustomPapi.CONFIG.getInt("Global.${varArg}.Default"))
+        save()
+    }
+
+    private fun save() {
+        kotlin.runCatching { getData().save(CustomPapi.getCPFolder().getPlayerDataFile(player.uniqueId)) }.onFailure { TLocale.sendToConsole("Data.SaveFailure", player.uniqueId) }
+    }
 }

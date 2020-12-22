@@ -20,6 +20,22 @@ class CPFolder constructor(private val plugin: CustomPapi) {
         return plugin.dataFolder
     }
 
+    fun setAllTimings() {
+        plugin.cp_dataMap.forEach {
+            val data = it.value
+            it.value.getKeys(false).forEach {
+                data.set("${it}.Timing", System.currentTimeMillis())
+            }
+            save(it.key, it.value)
+        }
+    }
+
+    fun getPlayerDataFile(uuid: UUID) : File {
+        val file = File(getCPFolderFile(), "${uuid}.yml")
+        if (!file.exists()) initPlayerData(uuid)
+        return file
+    }
+
     fun load() {
         val files = getCPFolderFile().listFiles { _, name -> name.endsWith("yml") }
         if (files != null) {
@@ -38,5 +54,9 @@ class CPFolder constructor(private val plugin: CustomPapi) {
     fun reload() {
         CustomPapi.cp_dataMap.clear()
         load()
+    }
+
+    private fun save(uuid: UUID, data: YamlConfiguration) {
+        kotlin.runCatching { data.save(CustomPapi.getCPFolder().getPlayerDataFile(uuid)) }.onFailure { TLocale.sendToConsole("Data.SaveFailure", uuid) }
     }
 }

@@ -1,23 +1,30 @@
 package me.mical.custompapi.config
 
+import io.izzel.taboolib.module.locale.TLocale
 import me.mical.custompapi.CustomPapi
+import org.bukkit.configuration.ConfigurationSection
 
-class CPConfig constructor(private val plugin: CustomPapi) {
+class CPConfig constructor(plugin: CustomPapi) {
     private val data = plugin.CONFIG
+    fun getGlobalMap() : HashMap<String, ConfigurationSection> = hashMapOf()
 
-    private fun getInternalIDs() : Set<String> {
-        return data.getConfigurationSection("Global")!!.getKeys(false)
+    fun load() {
+        val allData = data.getConfigurationSection("Global")
+        if (allData == null) {
+            TLocale.sendToConsole("GlobalData.Load.None")
+            return
+        }
+        for (varArg in allData.getKeys(false)) {
+            val configSec = data.getConfigurationSection(varArg)
+            if (configSec != null && configSec.getKeys(false).containsAll(listOf("Default", "Timing"))) {
+                getGlobalMap()[varArg] = configSec
+            }
+        }
     }
 
-    fun getInternalIDDataType(internalID: String) : String {
-        if (getInternalIDs().contains(internalID))
-            return data.getString("Global.${internalID}.DataType", "int")!!
-        return "int"
+    fun reload() {
+        getGlobalMap().clear()
+        load()
     }
 
-    fun getInternalIDDsfaultValue(internalID: String) : Any {
-        if (getInternalIDs().contains(internalID))
-            return data.get("Global.${internalID}.DataType")!!
-        return 100
-    }
 }

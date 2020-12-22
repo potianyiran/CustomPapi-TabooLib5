@@ -3,6 +3,7 @@ package me.mical.custompapi
 import io.izzel.taboolib.loader.Plugin
 import io.izzel.taboolib.module.config.TConfig
 import io.izzel.taboolib.module.inject.TInject
+import me.mical.custompapi.config.CPConfig
 import me.mical.custompapi.config.CPFile
 import me.mical.custompapi.config.CPFolder
 import me.mical.custompapi.hook.CPExpansion
@@ -15,6 +16,7 @@ import java.util.*
 object CustomPapi : Plugin() {
     fun getCPFolder() : CPFolder = CPFolder(this)
     fun getCPFile() : CPFile = CPFile(this)
+    fun getCPConfig() : CPConfig = CPConfig(this)
     val cp_dataMap = hashMapOf<UUID, YamlConfiguration>()
     @TInject("config.yml", locale = "Language")
     lateinit var CONFIG : TConfig
@@ -22,6 +24,7 @@ object CustomPapi : Plugin() {
     override fun onEnable() {
         getCPFolder().load()
         Bukkit.getOnlinePlayers().forEach { it.toCPPlayer().initData() }
+        getCPConfig().load()
         CPExpansion().register()
     }
 
