@@ -17,7 +17,7 @@ class CPFolder constructor(private val plugin: CustomPapi) {
     }
 
     fun getCPFolderFile() : File {
-        return plugin.dataFolder
+        return File(plugin.dataFolder, "data")
     }
 
     fun setAllTimings() {

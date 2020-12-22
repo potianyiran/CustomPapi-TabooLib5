@@ -6,9 +6,7 @@
 name: ${name}
 main: ${main}
 version: ${version}
-authors: ['坏黑']
-
-api-version: 1.13
+authors: ['Mical']
 
 lib-download: true
 lib-version: ${libVersion}

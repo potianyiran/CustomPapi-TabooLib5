@@ -14,25 +14,26 @@ import java.io.File
 import java.util.*
 
 object CustomPapi : Plugin() {
-    fun getCPFolder() : CPFolder = CPFolder(this)
-    fun getCPFile() : CPFile = CPFile(this)
-    fun getCPConfig() : CPConfig = CPConfig(this)
+    fun getCPFolder(): CPFolder = CPFolder(this)
+    fun getCPFile(): CPFile = CPFile(this)
+    fun getCPConfig(): CPConfig = CPConfig(this)
     val cp_dataMap = hashMapOf<UUID, YamlConfiguration>()
+
     @TInject("config.yml", locale = "Language")
-    lateinit var CONFIG : TConfig
+    lateinit var CONFIG: TConfig
+    lateinit var dataFolder: File
 
     override fun onEnable() {
+        dataFolder = if (CONFIG.getString("Storage") == "this")
+            plugin.dataFolder
+        else {
+            val file = File(CONFIG.getString("Storage")!!)
+            if (file.exists()) file else plugin.dataFolder
+        }
         getCPFolder().load()
         Bukkit.getOnlinePlayers().forEach { it.toCPPlayer().initData() }
         getCPConfig().load()
         CPExpansion().register()
     }
 
-    val dataFolder : File =
-        if (CONFIG.getString("Storage") == "this")
-            plugin.dataFolder
-        else {
-            val file = File(CONFIG.getString("Storage")!!)
-            if (file.exists()) file else plugin.dataFolder
-        }
 }
