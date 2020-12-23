@@ -4,6 +4,8 @@ FailLoadData: "&7[&3Custom&bPapi&7] &f加载 &c数据文件夹/data &f时遇到�
 ReloadComplete: "&7[&3Custom&bPapi&7] &f已成功重载数据文件和配置文件. (&3{0}&fMs)"
 InitedData: "&7[&3Custom&bPapi&7] &f已为玩家 &c{0} &f创建数据档案."
 GlobalData.Load.None: "&7[&3Custom&bPapi&7] &f没有子变量可供加载."
+LoadedVar: "&7[&3Custom&bPapi&7] &f已加载 &c子变量/{0} &f."
+LoadedAllVar: "&7[&3Custom&bPapi&7] &f子变量加载成功, 共加载了 &c{0} &f个子变量."
 Data.SaveFailure: "&7[&3Custom&bPapi&7] &f无法保存 &c{0} &f的数据文件."
-Command:
-  IllegalArgument: "&7[&3Custom&bPapi&7] &f参数非法或参数不足."
+Successful: "&7[&3Custom&bPapi&7] &f设置成功."
+Command.IllegalArgument: "&7[&3Custom&bPapi&7] &f参数非法或参数不足."

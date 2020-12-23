@@ -19,7 +19,10 @@ class CommandAdd : BaseSubCommand() {
         val player = if (sender is Player) sender else null
         if (player != null)
             kotlin.runCatching {
-                args[1].let { player.toCPPlayer().addDum(args[0], it.toInt()) }
+                args[1].let {
+                    player.toCPPlayer().addDum(args[0], it.toInt())
+                    TLocale.sendTo(player, "Successful")
+                }
             }.onFailure { TLocale.sendTo(player, "Command.IllegalArgument") }
     }
 }

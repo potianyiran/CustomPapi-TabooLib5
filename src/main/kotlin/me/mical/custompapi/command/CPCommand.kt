@@ -3,6 +3,8 @@ package me.mical.custompapi.command
 import io.izzel.taboolib.module.command.base.*
 import me.mical.custompapi.command.sub.CommandAdd
 import me.mical.custompapi.command.sub.CommandReload
+import me.mical.custompapi.command.sub.CommandSet
+import me.mical.custompapi.command.sub.CommandTake
 
 @BaseCommand(name = "CustomPapi", aliases = ["cp", "cpapi"], permission = "CustomPapi.use")
 class CPCommand : BaseMainCommand() {
@@ -14,9 +16,9 @@ class CPCommand : BaseMainCommand() {
     val add : BaseSubCommand = CommandAdd()
 
     @SubCommand(permission = "CustomPapi.take", description = "减少指定变量的整数值", type = CommandType.PLAYER)
-    val take : BaseSubCommand = CommandAdd()
+    val take : BaseSubCommand = CommandTake()
 
     @SubCommand(permission = "CustomPapi.set", description = "设置指定变量的整数值", type = CommandType.PLAYER)
-    val set : BaseSubCommand = CommandAdd()
+    val set : BaseSubCommand = CommandSet()
 
 }

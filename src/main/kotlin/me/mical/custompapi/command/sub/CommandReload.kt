@@ -14,9 +14,7 @@ class CommandReload : BaseSubCommand() {
         TLocale.reload()
         CustomPapi.CONFIG.reload()
         CustomPapi.getCPFolder().reload()
-        CPExpansion().unregister()
         CustomPapi.getCPConfig().reload()
-        CPExpansion().register()
         TLocale.sendTo(sender, "ReloadComplete", (System.currentTimeMillis() - start))
     }
 

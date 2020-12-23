@@ -9,6 +9,7 @@ import me.mical.custompapi.config.CPFolder
 import me.mical.custompapi.hook.CPExpansion
 import me.mical.custompapi.util.Util.toCPPlayer
 import org.bukkit.Bukkit
+import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 import java.util.*
@@ -18,6 +19,7 @@ object CustomPapi : Plugin() {
     fun getCPFile(): CPFile = CPFile(this)
     fun getCPConfig(): CPConfig = CPConfig(this)
     val cp_dataMap = hashMapOf<UUID, YamlConfiguration>()
+    val global_dataMap = hashMapOf<String, ConfigurationSection>()
 
     @TInject("config.yml", locale = "Language")
     lateinit var CONFIG: TConfig
@@ -31,9 +33,11 @@ object CustomPapi : Plugin() {
             if (file.exists()) file else plugin.dataFolder
         }
         getCPFolder().load()
-        Bukkit.getOnlinePlayers().forEach { it.toCPPlayer().initData() }
         getCPConfig().load()
         CPExpansion().register()
+        getCPFolder().setAllTimings()
+        Bukkit.getOnlinePlayers().forEach { it.toCPPlayer().initData() }
+        println(getCPConfig().getGlobalMap())
     }
 
 }

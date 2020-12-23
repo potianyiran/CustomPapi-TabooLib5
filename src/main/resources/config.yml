@@ -1,3 +1,7 @@
 Language: "zh_CN"
-Prefix: "cptextprefix"
+Prefix: "cptestprefix"
 Storage: "this"
+Global:
+  hello:
+    Default: 10086
+    Timing: 60

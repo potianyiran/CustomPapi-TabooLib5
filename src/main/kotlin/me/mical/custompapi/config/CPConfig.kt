@@ -6,7 +6,7 @@ import org.bukkit.configuration.ConfigurationSection
 
 class CPConfig constructor(plugin: CustomPapi) {
     private val data = plugin.CONFIG
-    fun getGlobalMap() : HashMap<String, ConfigurationSection> = hashMapOf()
+    fun getGlobalMap() = CustomPapi.global_dataMap
 
     fun load() {
         val allData = data.getConfigurationSection("Global")
@@ -14,11 +14,17 @@ class CPConfig constructor(plugin: CustomPapi) {
             TLocale.sendToConsole("GlobalData.Load.None")
             return
         }
-        for (varArg in allData.getKeys(false)) {
-            val configSec = data.getConfigurationSection(varArg)
-            if (configSec != null && configSec.getKeys(false).containsAll(listOf("Default", "Timing"))) {
-                getGlobalMap()[varArg] = configSec
+        if (allData.getKeys(false).size != 0) {
+            for (varArg in allData.getKeys(false)) {
+                val configSec = allData.getConfigurationSection(varArg)
+                if (configSec != null && configSec.getKeys(false).containsAll(listOf("Default", "Timing"))) {
+                    getGlobalMap()[varArg] = configSec
+                    TLocale.sendToConsole("LoadedVar", varArg)
+                }
             }
+            TLocale.sendToConsole("LoadedAllVar", allData.getKeys(false).size)
+        } else {
+            TLocale.sendToConsole("GlobalData.Load.None")
         }
     }
 

@@ -10,10 +10,17 @@ class CPPlayer constructor(private val player: OfflinePlayer) {
     fun getData() : YamlConfiguration = CustomPapi.getCPFile().getData(player)
     fun hasData() : Boolean = CustomPapi.cp_dataMap.containsKey(player.uniqueId)
     fun initData() {
-        if (!(CustomPapi.cp_dataMap.containsKey(player.uniqueId) || File(CustomPapi.getCPFolder().getCPFolderFile(), "${player.uniqueId}.yml").exists())) {
+        if (!(hasData() || File(CustomPapi.getCPFolder().getCPFolderFile(), "${player.uniqueId}.yml").exists())) {
             CustomPapi.getCPFolder().initPlayerData(player.uniqueId)
             CustomPapi.cp_dataMap[player.uniqueId] = YamlConfiguration.loadConfiguration(File(CustomPapi.getCPFolder().getCPFolderFile(), "${player.uniqueId}.yml"))
-            TLocale.sendToConsole("InitedData", player.uniqueId.toString())
+            CustomPapi.getCPConfig().getGlobalMap().forEach {
+                CustomPapi.cp_dataMap[player.uniqueId]!!.createSection(it.key)
+                CustomPapi.cp_dataMap[player.uniqueId]!!.set("${it.key}.Timing", System.currentTimeMillis())
+                CustomPapi.cp_dataMap[player.uniqueId]!!.set("${it.key}.Amount", it.value.getInt("Default"))
+            }
+            kotlin.runCatching { getData().save(CustomPapi.getCPFolder().getPlayerDataFile(player.uniqueId)) }
+                    .onFailure { TLocale.sendToConsole("Data.SaveFailure", player.uniqueId) }
+                    .onSuccess { TLocale.sendToConsole("InitedData", player.uniqueId.toString()) }
         }
     }
 
@@ -22,7 +29,12 @@ class CPPlayer constructor(private val player: OfflinePlayer) {
     }
 
     fun getTiming(varArg: String) : Long {
-        return getData().getLong("${varArg}.Amount", System.currentTimeMillis())
+        return getData().getLong("${varArg}.Timing", System.currentTimeMillis())
+    }
+
+    private fun setTiming(varArg: String, timing: Long) {
+        getData().set("${varArg}.Timing", timing)
+        save()
     }
 
     fun setDum(varArg: String, dum: Int) {
@@ -42,6 +54,7 @@ class CPPlayer constructor(private val player: OfflinePlayer) {
 
     fun setDefault(varArg: String) {
         getData().set("${varArg}.Amount", CustomPapi.CONFIG.getInt("Global.${varArg}.Default"))
+        setTiming(varArg, System.currentTimeMillis())
         save()
     }
 

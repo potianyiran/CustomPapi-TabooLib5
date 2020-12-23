@@ -15,7 +15,10 @@ class CPExpansion : PlaceholderExpansion() {
 
     override fun onRequest(player: OfflinePlayer?, params: String): String? {
         if (!player!!.toCPPlayer().getData().getKeys(false).contains(params)) return null
-        if (player.toCPPlayer().getTiming(params) != 0L && ((System.currentTimeMillis() - player.toCPPlayer().getTiming(params)) % CustomPapi.CONFIG.getLong("Global.${params}.Timing") == 0L )) {
+        val current = System.currentTimeMillis().toInt()
+        val timestamp = player.toCPPlayer().getTiming(params).toInt()
+        val timing = CustomPapi.global_dataMap[params]!!.getLong("Timing").toInt() * 1000
+        if ((current - timestamp) >= timing) {
             player.toCPPlayer().setDefault(params)
         }
         return player.toCPPlayer().getDum(params).toString()
