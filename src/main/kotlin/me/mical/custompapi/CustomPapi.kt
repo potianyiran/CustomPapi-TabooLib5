@@ -23,15 +23,8 @@ object CustomPapi : Plugin() {
 
     @TInject("config.yml", locale = "Language")
     lateinit var CONFIG: TConfig
-    lateinit var dataFolder: File
 
     override fun onEnable() {
-        dataFolder = if (CONFIG.getString("Storage") == "this")
-            plugin.dataFolder
-        else {
-            val file = File(CONFIG.getString("Storage")!!)
-            if (file.exists()) file else plugin.dataFolder
-        }
         getCPFolder().load()
         getCPConfig().load()
         CPExpansion().register()

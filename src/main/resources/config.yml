@@ -1,6 +1,5 @@
 Language: "zh_CN"
 Prefix: "cptestprefix"
-Storage: "this"
 Global:
   hello:
     Default: 10086
