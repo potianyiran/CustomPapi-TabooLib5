@@ -22,8 +22,8 @@
 
 | 名称  | 描述 |
 |----: | :---- |
-|cp_time_%公众ID%|查看指定变量的剩余刷新时间|
-|cptestprefix_%公众ID%|对应变量返回值|
+|%cp_time_公众ID%|查看指定变量的剩余刷新时间|
+|%cptestprefix_公众ID%|对应变量返回值|
 - cptestprefix 可以在 config 中修改
 
 ## 鸣谢
