@@ -7,8 +7,8 @@ import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
 class CPPlayer constructor(private val player: OfflinePlayer) {
-    fun getData() : YamlConfiguration = CustomPapi.getCPFile().getData(player)
-    fun hasData() : Boolean = CustomPapi.cp_dataMap.containsKey(player.uniqueId)
+    fun getData(): YamlConfiguration = CustomPapi.getCPFile().getData(player)
+    fun hasData(): Boolean = CustomPapi.cp_dataMap.containsKey(player.uniqueId)
     fun initData() {
         if (!(hasData() || File(CustomPapi.getCPFolder().getCPFolderFile(), "${player.uniqueId}.yml").exists())) {
             CustomPapi.getCPFolder().initPlayerData(player.uniqueId)
@@ -24,11 +24,11 @@ class CPPlayer constructor(private val player: OfflinePlayer) {
         }
     }
 
-    fun getDum(varArg: String) : Int {
+    fun getDum(varArg: String): Int {
         return getData().getInt("${varArg}.Amount", 0)
     }
 
-    fun getTiming(varArg: String) : Long {
+    fun getTiming(varArg: String): Long {
         return getData().getLong("${varArg}.Timing", System.currentTimeMillis())
     }
 

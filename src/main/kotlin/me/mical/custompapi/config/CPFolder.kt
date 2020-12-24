@@ -16,7 +16,7 @@ class CPFolder constructor(private val plugin: CustomPapi) {
         if (!file.exists()) file.createNewFile()
     }
 
-    fun getCPFolderFile() : File {
+    fun getCPFolderFile(): File {
         return File(plugin.plugin.dataFolder, "data")
     }
 
@@ -30,7 +30,7 @@ class CPFolder constructor(private val plugin: CustomPapi) {
         }
     }
 
-    fun getPlayerDataFile(uuid: UUID) : File {
+    fun getPlayerDataFile(uuid: UUID): File {
         val file = File(getCPFolderFile(), "${uuid}.yml")
         if (!file.exists()) initPlayerData(uuid)
         return file

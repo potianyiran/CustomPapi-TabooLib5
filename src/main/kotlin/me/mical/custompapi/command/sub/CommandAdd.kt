@@ -15,6 +15,7 @@ class CommandAdd : BaseSubCommand() {
             Argument("内部ID") { CustomPapi.getCPConfig().getGlobalMap().map { it.key } },
             Argument("数量", false)
     )
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>) {
         val player = if (sender is Player) sender else null
         if (player != null)

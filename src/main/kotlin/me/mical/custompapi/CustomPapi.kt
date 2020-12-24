@@ -7,11 +7,11 @@ import me.mical.custompapi.config.CPConfig
 import me.mical.custompapi.config.CPFile
 import me.mical.custompapi.config.CPFolder
 import me.mical.custompapi.hook.CPExpansion
+import me.mical.custompapi.hook.ParamsExpansion
 import me.mical.custompapi.util.Util.toCPPlayer
 import org.bukkit.Bukkit
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.YamlConfiguration
-import java.io.File
 import java.util.*
 
 object CustomPapi : Plugin() {
@@ -20,6 +20,12 @@ object CustomPapi : Plugin() {
     fun getCPConfig(): CPConfig = CPConfig(this)
     val cp_dataMap = hashMapOf<UUID, YamlConfiguration>()
     val global_dataMap = hashMapOf<String, ConfigurationSection>()
+    var hookPapi = try {
+        Class.forName("me.clip.placeholderapi.PlaceholderAPI")
+        true
+    } catch (e: Throwable) {
+        false
+    }
 
     @TInject("config.yml", locale = "Language")
     lateinit var CONFIG: TConfig
@@ -27,10 +33,19 @@ object CustomPapi : Plugin() {
     override fun onEnable() {
         getCPFolder().load()
         getCPConfig().load()
-        CPExpansion().register()
         getCPFolder().setAllTimings()
         Bukkit.getOnlinePlayers().forEach { it.toCPPlayer().initData() }
-        println(getCPConfig().getGlobalMap())
+        if (hookPapi && !(ParamsExpansion().isRegistered || CPExpansion().register())) {
+            CPExpansion().register()
+            ParamsExpansion().register()
+        }
+    }
+
+    override fun onDisable() {
+        if (hookPapi && (ParamsExpansion().isRegistered || CPExpansion().register())) {
+            CPExpansion().unregister()
+            ParamsExpansion().unregister()
+        }
     }
 
 }

@@ -15,11 +15,15 @@ class CommandSet : BaseSubCommand() {
             Argument("内部ID") { CustomPapi.getCPConfig().getGlobalMap().map { it.key } },
             Argument("数量", false)
     )
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>) {
         val player = if (sender is Player) sender else null
         if (player != null)
             kotlin.runCatching {
-                args[1].let { player.toCPPlayer().setDum(args[0], it.toInt()) }
+                args[1].let {
+                    player.toCPPlayer().setDum(args[0], it.toInt())
+                    TLocale.sendTo(player, "Successful")
+                }
             }.onFailure { TLocale.sendTo(player, "Command.IllegalArgument") }
     }
 }
