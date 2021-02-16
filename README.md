@@ -1,3 +1,5 @@
+## 本仓库已停止更新, 因为我写的 Kotlin 代码实在太烂. 最新更新请前往 https://github.com/MCStarrySky/SSCustomPapi
+
 ![ ](https://s3.ax1x.com/2021/01/22/sowa5t.png)
 
 ---
